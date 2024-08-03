@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Tabs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            background: #f1f1f1;
+            border-bottom: 2px solid #ccc;
+        }
+
+        .tabs li {
+            margin: 0;
+            padding: 0;
+        }
+
+        .tabs button {
+            background: none;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .tabs button.active,
+        .tabs button:hover {
+            background: #ccc;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            .tabs {
+                flex-direction: column;
+                border-bottom: none;
+            }
+
+            .tabs button {
+                width: 100%;
+                text-align: left;
+            }
+
+            .tabs button.active + .tab-content,
+            .tabs button:hover + .tab-content {
+                display: block;
+                border-top: 1px solid #ccc;
+            }
+
+            .tab-content {
+                border-top: 1px solid #ccc;
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <ul class="tabs">
+        <li>
+            <button class="tab-link active" onclick="openTab(event, 'tab1')">Tab 1</button>
+            <div id="tab1" class="tab-content active">
+                <h2>Content for Tab 1</h2>
+                <p>This is the content for tab 1.</p>
+            </div>
+        </li>
+        <li>
+            <button class="tab-link" onclick="openTab(event, 'tab2')">Tab 2</button>
+            <div id="tab2" class="tab-content">
+                <h2>Content for Tab 2</h2>
+                <p>This is the content for tab 2.</p>
+            </div>
+        </li>
+        <li>
+            <button class="tab-link" onclick="openTab(event, 'tab3')">Tab 3</button>
+            <div id="tab3" class="tab-content">
+                <h2>Content for Tab 3</h2>
+                <p>This is the content for tab 3.</p>
+            </div>
+        </li>
+    </ul>
+
+    <script>
+        function openTab(event, tabId) {
+            var i, tabContent, tabLinks;
+
+            // Hide all tab contents
+            tabContent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabContent.length; i++) {
+                tabContent[i].classList.remove("active");
+            }
+
+            // Remove the active class from all tab links
+            tabLinks = document.getElementsByClassName("tab-link");
+            for (i = 0; i < tabLinks.length; i++) {
+                tabLinks[i].classList.remove("active");
+            }
+
+            // Show the current tab and add an "active" class to the button that opened the tab
+            document.getElementById(tabId).classList.add("active");
+            event.currentTarget.classList.add("active");
+        }
+    </script>
+</body>
+</html>
